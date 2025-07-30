@@ -18,6 +18,7 @@ package vm
 
 import (
 	"errors"
+	"fmt"
 	"math/big"
 	"sync/atomic"
 
@@ -540,6 +541,7 @@ func (evm *EVM) initNewContract(contract *Contract, address common.Address) ([]b
 	}
 
 	// Check whether the max code size has been exceeded, assign err if the case.
+	fmt.Println("code size:", len(ret), "max code size:", params.MaxCodeSize)
 	if evm.chainRules.IsEIP158 && len(ret) > params.MaxCodeSize && !evm.Config.NoMaxCodeSize {
 		return ret, ErrMaxCodeSizeExceeded
 	}
